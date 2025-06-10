@@ -1,10 +1,33 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Startseite";
 }
+<link rel="stylesheet" href="~/css/Homepage.css" />
+<div class="container d-flex align-items-center justify-content-center flex-column" style="min-height: 80vh;">
+    <div class="row w-100 mb-4">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow p-4">
+                <h2>Zur Auswertung</h2>
+                <p>Analysiere deine bestehenden Daten.</p>
+                <a class="btn btn-primary" asp-page="/Analyse">Auswertung starten</a>
+            </div>
+        </div>
+    </div>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div class="row w-100">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow p-4">
+                <h2>CSV Upload</h2>
+                <p>Ziehe eine Datei hierher oder wähle sie aus:</p>
+
+                <form method="post" enctype="multipart/form-data" asp-page-handler="Upload">
+                    <div class="mb-3">
+                        <input type="file" name="CsvFile" class="form-control" accept=".csv" />
+                    </div>
+                    <button type="submit" class="btn btn-success">Hochladen</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

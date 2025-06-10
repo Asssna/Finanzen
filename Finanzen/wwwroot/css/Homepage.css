@@ -1,0 +1,12 @@
+﻿.card {
+    border-radius: 12px;
+}
+
+input[type="file"] {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
