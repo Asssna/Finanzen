@@ -1,2 +1,0 @@
-G:\CODING_PROJECTS\Finanzen\Finanzen\Finanzen\wwwroot\css\Analyse.css
-G:\CODING_PROJECTS\Finanzen\Finanzen\Finanzen\wwwroot\js\Analyse.js
