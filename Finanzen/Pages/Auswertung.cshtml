@@ -1,0 +1,237 @@
+﻿@page
+@model Finanzen.Pages.AnalyseModel
+@{
+    ViewData["Title"] = "Analyse";
+}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<link rel="stylesheet" href="~/css/Auswertung.css" />
+<script src="~/js/Auswertung.js" defer></script>
+<div class="container mt-4">
+
+    <h2>Kontostand</h2>
+
+    @if (!Model.IsEditingBalance)
+    {
+        <div class="d-flex align-items-center mb-2">
+            <p class="mb-0 me-2">
+                <strong>Ursprung:</strong> @Model.KontostandUrsprung.ToString("C")
+            </p>
+            <form method="post" asp-page-handler="EditBalance" class="d-inline">
+                <button class="btn btn-sm btn-outline-secondary" title="Bearbeiten">
+                    <i class="bi bi-pencil"></i>
+                </button>
+            </form>
+        </div>
+
+    }
+    else
+    {
+        <form method="post">
+            <div class="input-group mb-2" style="max-width: 300px;">
+                <span class="input-group-text">Ursprung:</span>
+                <input name="NewBalance" type="text" class="form-control" placeholder="z. B. 1234.56" value="@Model.KontostandUrsprung.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture)" />
+                <button class="btn btn-success" type="submit" asp-page-handler="SaveBalance" title="Speichern">
+                    <i class="bi bi-check-lg"></i>
+                </button>
+                <button class="btn btn-secondary" type="submit" asp-page-handler="ResetBalance" title="Zurücksetzen">
+                    <i class="bi bi-arrow-counterclockwise"></i>
+                </button>
+            </div>
+            @if (!string.IsNullOrEmpty(Model.Fehlermeldung))
+            {
+                <div class="alert alert-danger">@Model.Fehlermeldung</div>
+            }
+        </form>
+    }
+
+    <p><strong>Aktuell:</strong> @Model.KontostandAktuell.ToString("C")</p>
+
+    <form method="post" asp-page-handler="RecalcBalance">
+        <button class="btn btn-warning mb-4">Kontostand neu berechnen</button>
+    </form>
+
+    <button class="btn btn-secondary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#buchungenCollapse" aria-expanded="true" aria-controls="buchungenCollapse">Buchungen anzeigen / ausblenden</button>
+
+    <div id="buchungenCollapse" class="collapse @(Model.CollapseStates.TryGetValue("buchungenCollapse", out var isOpen) ? (isOpen ? "show" : "") : "show")">
+        <h2>Buchungen</h2>
+
+        <div class="mb-3">
+            <input id="filterInput" type="text" class="form-control" placeholder="Filtern nach Text/Kategorie/Umsatzart">
+        </div>
+
+        <!-- Tabelle mit fixem View-Fenster -->
+        <div style="max-height: 600px; overflow-y: auto; border: 1px solid #ccc; border-radius: 5px;">
+            <table class="table table-striped" id="buchungenTable">
+                <thead class="table-light">
+                    <tr>
+                        <th onclick="sortTable(0)">Buchungstag<span></span></th>
+                        <th onclick="sortTable(1)">Wertstellung<span></span></th>
+                        <th onclick="sortTable(2)">Umsatzart <span></span></th>
+                        <th onclick="sortTable(3)">Buchungstext <span></span></th>
+                        <th onclick="sortTable(4)">Betrag <span></span></th>
+                        <th onclick="sortTable(5)">Kategorie <span></span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var t in Model.Transactions)
+                    {
+                        <tr>
+                            <td>@t.Buchungstag.ToShortDateString()</td>
+                            <td>@(t.Wertstellung?.ToShortDateString() ?? "-")</td>
+                            <td>@t.Umsatzart</td>
+                            <td>@t.Buchungstext</td>
+                            <td>@t.Betrag.ToString("C")</td>
+                            <td>@t.Kategorie</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br />
+
+    <!-- Zeitraum-Auswertung -->
+    <button class="btn btn-secondary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseZeitraumAnalyse" aria-expanded="true" aria-controls="collapseZeitraumAnalyse">
+            Zeitraum-Ergebnisse anzeigen / ausblenden</button>
+
+    <div id="collapseZeitraumAnalyse" class="collapse show" >
+            <h3>Zeitraum-Auswertung</h3>
+
+            <form method="post" asp-page-handler="ZeitraumAnalyse" class="mb-3 row g-3" id="auswertungForm">
+                <div class="col-md-3">
+                    <label for="StartDate" class="form-label">Von:</label>
+                    <input type="date" class="form-control" id="StartDate" name="StartDate" value="@Model.StartDate?.ToString("yyyy-MM-dd")">
+                </div>
+                <div class="col-md-3">
+                    <label for="EndDate" class="form-label">Bis:</label>
+                    <input type="date" class="form-control" id="EndDate" name="EndDate" value="@Model.EndDate?.ToString("yyyy-MM-dd")">
+                </div>
+                <div class="col-md-3 align-self-end">
+                    <button type="submit" class="btn btn-primary">Auswertung starten</button>
+                </div>
+            </form>
+            @if (Model.ZeitraumAuswertungErgebnisse != null && Model.ZeitraumAuswertungErgebnisse.Any())
+            {
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Kategorie</th>
+                            <th>Summe</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var eintrag in Model.ZeitraumAuswertungErgebnisse)
+                        {
+                            <tr>
+                                <td>@eintrag.Key</td>
+                                <td>@eintrag.Value.ToString("C")</td>
+                            </tr>
+                        }
+                        <tr class="table-secondary fw-bold">
+                            <td>Gesamtausgaben</td>
+                            <td>
+                                @(Model.ZeitraumAuswertungErgebnisse
+                                .Where(e => e.Value < 0)
+                                .Sum(e => e.Value)
+                                .ToString("C"))
+                            </td>
+                        </tr>
+                        <tr class="table-secondary fw-bold">
+                            <td>Differenz Einnahmen - Ausgaben</td>
+                            <td>
+                                @(Model.ZeitraumAuswertungErgebnisse
+                                .Sum(e => e.Value)
+                                .ToString("C"))
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+        </div>
+
+    <!-- Einnahmen -->
+    <button class="btn btn-secondary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEinnahmen" aria-expanded="false" aria-controls="collapseEinnahmen">Einnahmen anzeigen / ausblenden</button>
+
+    <div id="collapseEinnahmen" class="collapse @(Model.CollapseStates.TryGetValue("collapseEinnahmen", out var isOpen1) && isOpen1 ? "show" : "")">
+        <h3>Einnahmen</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Kategorie</th>
+                    <th>Einnahmen</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Durchschnitt pro Monat</td>
+                    <td>@Model.EinnahmenDurchschnittProMonat.ToString("C")</td>
+                </tr>
+                <tr>
+                    <td>Gesamt</td>
+                    <td>@Model.EinnahmenGesamt.ToString("C")</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Durchschnittliche Ausgaben -->
+    <button class="btn btn-secondary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#avgTable" aria-expanded="false" aria-controls="avgTable">Ausgaben pro Monat und Kategorie anzeigen</button>
+    <div id="avgTable" class="collapse @(Model.CollapseStates.TryGetValue("avgTable", out var isOpen2) && isOpen2 ? "show" : "")">
+        <h3>Durchschnittliche Ausgaben pro Monat und Kategorie</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Kategorie</th>
+                    <th>Durchschnitt</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.DurchschnittlicheKostenProKategorie)
+                {
+                    <tr>
+                        <td>@item.Key</td>
+                        <td>@item.Value.ToString("C")</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td><strong>Gesamt</strong></td>
+                    <td><strong>@Model.DurchschnittlicheKostenProKategorie.Values.Sum().ToString("C")</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <!-- Gesamtausgaben -->
+    <br />
+    <button class="btn btn-secondary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#sumTable" aria-expanded="false" aria-controls="sumTable">Gesamtausgaben pro Kategorie anzeigen</button>
+    <div id="sumTable" class="collapse @(Model.CollapseStates.TryGetValue("sumTable", out var isOpen3) && isOpen3 ? "show" : "")">
+        <h3>Gesamtausgaben pro Kategorie</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Kategorie</th>
+                    <th>Gesamtausgaben</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.GesamtausgabenProKategorie)
+                {
+                    <tr>
+                        <td>@item.Key</td>
+                        <td>@item.Value.ToString("C")</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td><strong>Gesamt</strong></td>
+                    <td><strong>@Model.GesamtausgabenProKategorie.Values.Sum().ToString("C")</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+
+</div>

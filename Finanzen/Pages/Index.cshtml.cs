@@ -8,6 +8,7 @@ using CsvHelper;
 using CsvHelper.Configuration;
 using Finanzen.Models;
 using Finanzen.Data;
+using Microsoft.EntityFrameworkCore;
 namespace Finanzen.Pages
 {
     public class IndexModel : PageModel
@@ -75,7 +76,25 @@ namespace Finanzen.Pages
             }
 
             await _context.SaveChangesAsync();
+            await RecalculateBalanceAsync(userId);
             return RedirectToPage();
+        }
+
+        private async Task RecalculateBalanceAsync(string userId)
+        {
+            var transactions = await _context.Transactions
+                .Where(t => t.ApplicationUserId == userId)
+                .ToListAsync();
+
+            var sum = transactions.Sum(t => t.Betrag);
+
+            var balance = await _context.Balances.FirstOrDefaultAsync(b => b.ApplicationUserId == userId);
+
+            if (balance != null)
+            {
+                balance.Kontostand_Aktuell = balance.Kontostand_Ursprung + sum;
+                await _context.SaveChangesAsync();
+            }
         }
         public void OnGet()
         {

@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\Finanzen.vcxhcmuye9.bundle.scp.css"
     },
     {
+      "Id": "G:\\CODING_PROJECTS\\Finanzen\\Finanzen\\Finanzen\\wwwroot\\css\\Auswertung.css",
+      "PackagePath": "staticwebassets\\css\\Auswertung.css"
+    },
+    {
       "Id": "G:\\CODING_PROJECTS\\Finanzen\\Finanzen\\Finanzen\\wwwroot\\css\\Homepage.css",
       "PackagePath": "staticwebassets\\css\\Homepage.css"
     },
@@ -15,6 +19,10 @@
     {
       "Id": "G:\\CODING_PROJECTS\\Finanzen\\Finanzen\\Finanzen\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "G:\\CODING_PROJECTS\\Finanzen\\Finanzen\\Finanzen\\wwwroot\\js\\Auswertung.js",
+      "PackagePath": "staticwebassets\\js\\Auswertung.js"
     },
     {
       "Id": "G:\\CODING_PROJECTS\\Finanzen\\Finanzen\\Finanzen\\wwwroot\\js\\site.js",

@@ -1,0 +1,5 @@
+﻿table tr:hover {
+    background-color: #f3aa00;
+    transition: background-color 0.5s ease;
+    cursor: default;
+}

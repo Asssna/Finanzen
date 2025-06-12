@@ -11,5 +11,6 @@ namespace Finanzen.Data
         {
         }
         public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Balance> Balances { get; set; }
     }
 }

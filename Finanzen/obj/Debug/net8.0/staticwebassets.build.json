@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "+3cBLQ6wOSub7C5T3kWbkhdJRJFAVUlxV41u1VpcP88=",
+  "Hash": "e6sKtBvaJZjqXtr98HUGSA9hn6zQeED93eQww2NcOA0=",
   "Source": "Finanzen",
   "BasePath": "_content/Finanzen",
   "Mode": "Default",
@@ -1319,6 +1319,27 @@
       "OriginalItemSpec": "G:\\CODING_PROJECTS\\Finanzen\\Finanzen\\Finanzen\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Finanzen.bundle.scp.css"
     },
     {
+      "Identity": "G:\\CODING_PROJECTS\\Finanzen\\Finanzen\\Finanzen\\wwwroot\\css\\Auswertung.css",
+      "SourceId": "Finanzen",
+      "SourceType": "Discovered",
+      "ContentRoot": "G:\\CODING_PROJECTS\\Finanzen\\Finanzen\\Finanzen\\wwwroot\\",
+      "BasePath": "_content/Finanzen",
+      "RelativePath": "css/Auswertung#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "vy83ubtmih",
+      "Integrity": "J4oMCAbc9hIHDOL6f6ntbzNENNEYMMTPqCu9q5ocEfQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Auswertung.css"
+    },
+    {
       "Identity": "G:\\CODING_PROJECTS\\Finanzen\\Finanzen\\Finanzen\\wwwroot\\css\\Homepage.css",
       "SourceId": "Finanzen",
       "SourceType": "Discovered",
@@ -1380,6 +1401,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "G:\\CODING_PROJECTS\\Finanzen\\Finanzen\\Finanzen\\wwwroot\\js\\Auswertung.js",
+      "SourceId": "Finanzen",
+      "SourceType": "Discovered",
+      "ContentRoot": "G:\\CODING_PROJECTS\\Finanzen\\Finanzen\\Finanzen\\wwwroot\\",
+      "BasePath": "_content/Finanzen",
+      "RelativePath": "js/Auswertung#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "i19nbnd9un",
+      "Integrity": "hkRdmbn1hg4Y1RJL+Go6idJe7hBwKLIvRJQNPBW34+c=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Auswertung.js"
     },
     {
       "Identity": "G:\\CODING_PROJECTS\\Finanzen\\Finanzen\\Finanzen\\wwwroot\\js\\site.js",
@@ -2601,6 +2643,88 @@
     }
   ],
   "Endpoints": [
+    {
+      "Route": "css/Auswertung.css",
+      "AssetFile": "G:\\CODING_PROJECTS\\Finanzen\\Finanzen\\Finanzen\\wwwroot\\css\\Auswertung.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "123"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"J4oMCAbc9hIHDOL6f6ntbzNENNEYMMTPqCu9q5ocEfQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 12 Jun 2025 18:00:11 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-J4oMCAbc9hIHDOL6f6ntbzNENNEYMMTPqCu9q5ocEfQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/Auswertung.vy83ubtmih.css",
+      "AssetFile": "G:\\CODING_PROJECTS\\Finanzen\\Finanzen\\Finanzen\\wwwroot\\css\\Auswertung.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "123"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"J4oMCAbc9hIHDOL6f6ntbzNENNEYMMTPqCu9q5ocEfQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 12 Jun 2025 18:00:11 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "vy83ubtmih"
+        },
+        {
+          "Name": "label",
+          "Value": "css/Auswertung.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-J4oMCAbc9hIHDOL6f6ntbzNENNEYMMTPqCu9q5ocEfQ="
+        }
+      ]
+    },
     {
       "Route": "css/Homepage.css",
       "AssetFile": "G:\\CODING_PROJECTS\\Finanzen\\Finanzen\\Finanzen\\wwwroot\\css\\Homepage.css",
@@ -5228,6 +5352,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s="
+        }
+      ]
+    },
+    {
+      "Route": "js/Auswertung.i19nbnd9un.js",
+      "AssetFile": "G:\\CODING_PROJECTS\\Finanzen\\Finanzen\\Finanzen\\wwwroot\\js\\Auswertung.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2954"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hkRdmbn1hg4Y1RJL+Go6idJe7hBwKLIvRJQNPBW34+c=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 12 Jun 2025 19:18:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "i19nbnd9un"
+        },
+        {
+          "Name": "label",
+          "Value": "js/Auswertung.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-hkRdmbn1hg4Y1RJL+Go6idJe7hBwKLIvRJQNPBW34+c="
+        }
+      ]
+    },
+    {
+      "Route": "js/Auswertung.js",
+      "AssetFile": "G:\\CODING_PROJECTS\\Finanzen\\Finanzen\\Finanzen\\wwwroot\\js\\Auswertung.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2954"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hkRdmbn1hg4Y1RJL+Go6idJe7hBwKLIvRJQNPBW34+c=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 12 Jun 2025 19:18:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-hkRdmbn1hg4Y1RJL+Go6idJe7hBwKLIvRJQNPBW34+c="
         }
       ]
     },

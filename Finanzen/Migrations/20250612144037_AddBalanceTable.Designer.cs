@@ -3,6 +3,7 @@ using System;
 using Finanzen.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Finanzen.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250612144037_AddBalanceTable")]
+    partial class AddBalanceTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,13 +37,7 @@ namespace Finanzen.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<decimal>("Kontostand_Aktuell")
-                        .HasColumnType("numeric");
-
-                    b.Property<decimal>("Kontostand_Ursprung")
-                        .HasColumnType("numeric");
-
-                    b.Property<decimal>("Kontostand_Ursprung0")
+                    b.Property<decimal>("Kontostand")
                         .HasColumnType("numeric");
 
                     b.HasKey("Id");
