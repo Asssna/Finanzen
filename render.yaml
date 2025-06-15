@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: finanzen-app
+    runtime: docker
+    repo: https://github.com/Asssna/Finanzen
+    branch: main
+    dockerfilePath: Dockerfile
+    plan: free
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ConnectionStrings__DefaultConnection
+        sync: false  # Optional: Du trägst das manuell bei Render ein
