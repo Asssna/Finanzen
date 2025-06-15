@@ -28,7 +28,7 @@ public class TransactionCsvMap : ClassMap<Transaction>
             {
                 var raw = row.Row.GetField("Betrag");
                 return decimal.Parse(raw, new CultureInfo("de-DE"));
-            }); Map(m => m.Währung).Name("Währung");
+            }); Map(m => m.Waehrung).Name("Währung");
         Map(m => m.IBANKontoinhaber).Name("IBAN Kontoinhaber");
         Map(m => m.Kategorie).Name("Kategorie");
     }

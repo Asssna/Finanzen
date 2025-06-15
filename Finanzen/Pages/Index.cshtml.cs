@@ -61,7 +61,7 @@ namespace Finanzen.Pages
                         Umsatzart = record.Umsatzart,
                         Buchungstext = record.Buchungstext,
                         Betrag = record.Betrag,
-                        Währung = record.Währung,
+                        Waehrung = record.Waehrung,
                         IBANKontoinhaber = record.IBANKontoinhaber,
                         Kategorie = record.Kategorie,
                         ApplicationUserId = userId
