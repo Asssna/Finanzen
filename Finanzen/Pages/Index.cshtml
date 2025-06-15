@@ -1,34 +1,53 @@
 ﻿@page
 @model IndexModel
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Authorization
+@inject SignInManager<IdentityUser> SignInManager
 @{
     ViewData["Title"] = "Startseite";
 }
+
 <link rel="stylesheet" href="~/css/Homepage.css" />
 
-<div class="container d-flex align-items-center justify-content-center flex-column" style="min-height: 80vh;">
-    <div class="row w-100 mb-4">
-        <div class="col-md-8 offset-md-2">
-            <div class="card shadow p-4">
-                <h2>Zur Auswertung</h2>
-                <p>Analysiere deine bestehenden Daten.</p>
-                <a class="btn btn-primary" asp-page="/Auswertung">Auswertung</a>
+@if (!SignInManager.IsSignedIn(User))
+{
+    <!-- Nicht eingeloggt – Login anzeigen -->
+    <div class="container d-flex align-items-center justify-content-center" style="min-height: 80vh;">
+        <div class="text-center">
+            <h2>Willkommen bei Finanzen</h2>
+            <p>Bitte melde dich an, um fortzufahren.</p>
+            <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Login">Zum Login</a>
+        </div>
+    </div>
+}
+else
+{
+    <!-- Eingeloggt – Hauptinhalt -->
+    <div class="container d-flex align-items-center justify-content-center flex-column" style="min-height: 80vh;">
+        <div class="row w-100 mb-4">
+            <div class="col-md-8 offset-md-2">
+                <div class="card shadow p-4">
+                    <h2>Zur Auswertung</h2>
+                    <p>Analysiere deine bestehenden Daten.</p>
+                    <a class="btn btn-primary" asp-page="/Auswertung">Auswertung</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row w-100">
+            <div class="col-md-8 offset-md-2">
+                <div class="card shadow p-4">
+                    <h2>CSV Upload</h2>
+                    <p>Ziehe eine Datei hierher oder wähle sie aus:</p>
+
+                    <form method="post" enctype="multipart/form-data" asp-page-handler="Upload">
+                        <div class="mb-3">
+                            <input type="file" name="CsvFile" class="form-control" accept=".csv" />
+                        </div>
+                        <button type="submit" class="btn btn-success">Hochladen</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-
-    <div class="row w-100">
-        <div class="col-md-8 offset-md-2">
-            <div class="card shadow p-4">
-                <h2>CSV Upload</h2>
-                <p>Ziehe eine Datei hierher oder wähle sie aus:</p>
-
-                <form method="post" enctype="multipart/form-data" asp-page-handler="Upload">
-                    <div class="mb-3">
-                        <input type="file" name="CsvFile" class="form-control" accept=".csv" />
-                    </div>
-                    <button type="submit" class="btn btn-success">Hochladen</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+}

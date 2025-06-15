@@ -211,15 +211,22 @@ namespace Finanzen.Pages
 
         private void BerechneEinnahmen()
         {
+            if (Transactions == null || !Transactions.Any())
+            {
+                EinnahmenGesamt = 0;
+                EinnahmenDurchschnittProMonat = 0;
+                return;
+            }
+
             var einnahmen = Transactions
                 .Where(t => t.Kategorie == "Einnahmen")
                 .ToList();
 
             EinnahmenGesamt = einnahmen.Sum(t => t.Betrag);
 
-            // Gesamtzeitraum wie bei Ausgaben
             var minDate = Transactions.Min(t => t.Buchungstag);
             var maxDate = Transactions.Max(t => t.Buchungstag);
+
             int gesamtMonate = ((maxDate.Year - minDate.Year) * 12 + maxDate.Month - minDate.Month) + 1;
 
             EinnahmenDurchschnittProMonat = gesamtMonate > 0
