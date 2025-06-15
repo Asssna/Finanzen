@@ -20,7 +20,7 @@ namespace Finanzen.Models
         [Column(TypeName = "decimal(18,2)")]
         public decimal Betrag { get; set; }
 
-        public string Währung { get; set; }
+        public string Waehrung { get; set; }
 
         public string IBANKontoinhaber { get; set; }
 
