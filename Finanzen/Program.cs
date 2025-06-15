@@ -1,8 +1,16 @@
 using Finanzen.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
+
+var cultureInfo = new CultureInfo("de-DE");
+CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
 //Add DB Secret to connect to get connectionstring for database. 
 builder.Configuration.AddUserSecrets<Program>();
 // Add services to the container.
